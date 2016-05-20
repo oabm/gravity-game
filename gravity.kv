@@ -1,0 +1,92 @@
+#:kivy 1.0.9
+
+<AimLine>:
+	canvas:
+		Color:
+			rgb: 1., .2, .2
+		Line:
+			points: [self.start_pt[0], self.start_pt[1], self.end_pt[0], self.end_pt[1]]
+			dash_length: 1.
+			dash_offset: 4.
+
+<DynamicPhysicsEntity>:
+	source: self.source
+	canvas:
+		Color:
+			rgb: (1,1,1)
+		Ellipse:
+			source: self.source
+			pos: self.pos
+			size: self.size
+
+<StartZone>:
+	source: self.source
+	canvas:
+		Color:
+			rgb: (0, 1, 0)
+		Rectangle:
+			source: self.source
+			pos: self.pos
+			size: self.size
+
+<EndZone>:
+	source: self.source
+	canvas:
+		Color:
+			rgb: (1, 0, 0)
+		Rectangle:
+			source: self.source
+			pos: self.pos
+			size: self.size
+
+<Control>:
+	dynamicEntities: [first_planet, second_planet, third_planet, first_satellite]
+	satellite: first_satellite
+	startZone: startZone
+	endZone: endZone
+
+	StartZone:
+		id: startZone
+		size: 100,100
+		pos: 134,455
+		source: 'graphics/boundary_inv.png'
+
+	EndZone:
+		id: endZone
+		size: 100,100
+		pos: 1228, 756
+		source: 'graphics/boundary_inv.png'
+	
+	DynamicPhysicsEntity:
+		size: 100, 100
+		id: first_planet
+		source: 'graphics/planet1.gif'
+		center: self.parent.center_x+300, self.parent.center_y-200
+		mass: 125000.0
+		canMove: False
+
+	DynamicPhysicsEntity:
+		size: 50, 50
+		id: second_planet
+		source: 'graphics/planet2.gif'
+		center: self.parent.center_x-200, self.parent.center_y+150
+		mass: 15625.0
+		canMove: False
+
+	DynamicPhysicsEntity:
+		size: 50, 50
+		id: third_planet
+		source: 'graphics/planet3.gif'
+		center: self.parent.center_x+300, 756
+		mass: 15625.0
+		canMove: False
+
+	DynamicPhysicsEntity:
+		size: 10, 10
+		id: first_satellite
+		center: self.parent.center_x+10, 10
+		mass: 125.0
+		canMove: True
+
+
+
