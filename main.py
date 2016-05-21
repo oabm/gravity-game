@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import kivy
 from kivy.app import App
 from kivy.uix.widget import Widget
@@ -49,7 +51,7 @@ class DynamicPhysicsEntity(Widget):
 
     if collidedEntity:
       self.velocity = util.calculateBounceVelocity(self, collidedEntity) * ENERGY_LOST
-      self.pos += Vector(self.velocity) * (1 - (distTraveled.length() / Vector(self.velocity).length()))
+      self.pos = Vector(self.pos) + Vector(self.velocity) * (1 - (distTraveled.length() / Vector(self.velocity).length()))
 
 
   def move(self):
